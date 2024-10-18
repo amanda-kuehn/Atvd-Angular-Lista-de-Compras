@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Lista de Compras</h1>
+
+  <form (ngSubmit)="adicionarItem()" #itemForm="ngForm">
+    <input type="text" [(ngModel)]="novoItem" name="nome" required />
+    <button type="submit" [disabled]="!itemForm.form.valid">Adicionar</button>
+  </form>
+
+  <div class="list-group">
+    <h3>Itens Não Comprados</h3>
+    <div *ngFor="let item of naoComprados" class="list-item">
+      <input type="text" [(ngModel)]="item.nome" (blur)="editarItem(item)" />
+      <button (click)="marcarComoComprado(item)">✔</button>
+      <button (click)="excluirItem(item.id)">🗑️</button>
+    </div>
+
+    <h3>Itens Comprados</h3>
+    <div *ngFor="let item of comprados" class="list-item comprado">
+      <span>{{ item.nome }}</span>
+      <button (click)="marcarComoComprado(item)">✔</button>
+      <button (click)="excluirItem(item.id)">🗑️</button>
+    </div>
+  </div>
+</div>
+
